@@ -1,10 +1,6 @@
-// APIs que vamos usar
+
 const DOG_API_URL = 'https://api.thedogapi.com/v1/breeds';
 const CAT_API_URL = 'https://api.thecatapi.com/v1/breeds';
-const RANDOM_PET_IMAGES = {
-    dog: 'https://images.dog.ceo/breeds/',
-    cat: 'https://api.thecatapi.com/v1/images/search?limit=10'
-};
 
 const loadingElement = document.getElementById('loading');
 const errorElement = document.getElementById('error');
@@ -13,7 +9,6 @@ const petTypeSelect = document.getElementById('petType');
 const cameraModal = document.getElementById('cameraModal');
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
-
 
 const availablePets = [
     {
@@ -28,14 +23,14 @@ const availablePets = [
     {
         id: 2,
         name: "Lana",
-        type: "cat",
+        type: "cat", 
         breed: "Frajola",
-        age: "2 ano",
+        age: "2 anos", 
         location: "Várzea, Recife",
         distance: "0.8 km"
     },
     {
-        id: 1,
+        id: 3, 
         name: "Bob",
         type: "dog",
         breed: "Bulldog Francês",
@@ -44,16 +39,15 @@ const availablePets = [
         distance: "10 km"
     },
     {
-        id: 2,
+        id: 4, 
         name: "Lulu",
         type: "cat",
         breed: "Tricolor",
         age: "2 anos",
-        location: "Várzea, Recife",
+        location: "Várzea, Recife", 
         distance: "0.8 km"
     }
 ];
-
 
 function getLocation() {
     showLoading();
@@ -64,19 +58,16 @@ function getLocation() {
     }
 
     navigator.geolocation.getCurrentPosition(
-        // Sucesso
         async (position) => {
             const { latitude, longitude } = position.coords;
             await fetchPets(latitude, longitude);
         },
-        // Erro
         (error) => {
             let errorMessage = 'Erro ao obter localização: ';
             
             switch(error.code) {
                 case error.PERMISSION_DENIED:
                     errorMessage += 'Permissão negada pelo usuário';
-                    // Mostrar pets mesmo sem localização
                     fetchPets(null, null);
                     break;
                 case error.POSITION_UNAVAILABLE:
@@ -92,7 +83,6 @@ function getLocation() {
                     fetchPets(null, null);
             }
         },
-       
         {
             enableHighAccuracy: true,
             timeout: 10000,
@@ -103,7 +93,6 @@ function getLocation() {
 
 async function fetchPets(lat, lng) {
     try {
-        // Simular delay de API
         await new Promise(resolve => setTimeout(resolve, 1500));
         
         const selectedType = petTypeSelect.value;
@@ -121,7 +110,6 @@ async function fetchPets(lat, lng) {
     }
 }
 
-
 function displayPets(pets) {
     hideLoading();
     hideError();
@@ -133,18 +121,19 @@ function displayPets(pets) {
 
     petsElement.innerHTML = pets.map(pet => `
         <div class="pet-card">
-            <img src="${getPetImage(pet.type, pet.breed)}" alt="${pet.name}" onerror="this.src='https://via.placeholder.com/300x200/4ECDC4/white?text=PET+IMAGE'">
+            <img src="${getPetImage(pet.type, pet.breed)}" 
+                 alt="${pet.name}" 
+                 onerror="this.src='https://via.placeholder.com/300x200/4ECDC4/white?text=Pet+${pet.name.split(' ').join('+')}'">
             <h3>${pet.name}</h3>
             <p class="pet-info"><span class="pet-breed">${pet.breed}</span> - ${pet.age}</p>
             <p class="pet-info">📍 ${pet.location}</p>
             <p class="pet-info">📏 ${pet.distance} de você</p>
-            <button onclick="adoptPet('${pet.name}')" style="background: #FF6B6B; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; margin-top: 10px; width: 100%;">
+            <button onclick="adoptPet('${pet.name}')" class="adopt-btn">
                 🏠 Quero Adotar
             </button>
         </div>
     `).join('');
 }
-
 
 function getPetImage(type, breed) {
     if (type === 'dog') {
@@ -153,7 +142,6 @@ function getPetImage(type, breed) {
         return `https://cdn2.thecatapi.com/images/${Math.random().toString(36).substr(2, 9)}.jpg`;
     }
 }
-
 
 function openCamera() {
     cameraModal.style.display = 'block';
@@ -183,12 +171,10 @@ function takePhoto() {
     canvas.height = video.videoHeight;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     
-    // Aqui você enviaria a foto para um servidor
     alert('Foto tirada! Em uma aplicação real, esta foto seria enviada para reportar o pet perdido.');
     
     closeCamera();
 }
-
 
 function adoptPet(petName) {
     alert(`🎉 Ótima escolha! Você demonstrou interesse em adotar ${petName}. Em uma aplicação real, entraríamos em contato com você!`);
@@ -215,12 +201,31 @@ function hideError() {
     errorElement.style.display = 'none';
 }
 
-
 document.querySelector('.close').addEventListener('click', closeCamera);
-
 
 document.addEventListener('DOMContentLoaded', getLocation);
 
+
+const style = document.createElement('style');
+style.textContent = `
+    .adopt-btn {
+        background: #FF6B6B;
+        color: white;
+        border: none;
+        padding: 12px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    
+    .adopt-btn:hover {
+        background: #ff5252;
+    }
+`;
+document.head.appendChild(style);
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
