@@ -1,27 +1,27 @@
 {
     "name": "PetFinder - Adote um amigo",
     "short_name": "PetFinder",
-    "description": "Encontre pets para adoção perto de você",
+    "description": "Encontre pets para adoção perto de você", 
     "start_url": "/",
     "display": "standalone",
     "background_color": "#FF6B6B",
     "theme_color": "#FF6B6B",
     "orientation": "portrait",
-    "icons": [ 
+    "icons": [
         {
-            "src": "images/rick.png",
-            "sizes": "72x72",
-            "type": "image/png"
+            "src": "images/rick.jpg",
+            "sizes": "72x72", 
+            "type": "image/jpeg"
         },
         {
-            "src": "images/lana.png.png", 
+            "src": "images/lana.jpg.jpg",
             "sizes": "96x96",
-            "type": "image/png"
+            "type": "image/jpeg"
         },
         {
-            "src": "images/bob.png",
+            "src": "images/Bob.jpg", 
             "sizes": "144x144",
-            "type": "image/png"
+            "type": "image/jpeg"
         }
-    ]  
+    ]
 }
