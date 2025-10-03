@@ -1,4 +1,3 @@
-
 const DOG_API_URL = 'https://api.thedogapi.com/v1/breeds';
 const CAT_API_URL = 'https://api.thecatapi.com/v1/breeds';
 
@@ -9,6 +8,7 @@ const petTypeSelect = document.getElementById('petType');
 const cameraModal = document.getElementById('cameraModal');
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
+
 
 const availablePets = [
     {
