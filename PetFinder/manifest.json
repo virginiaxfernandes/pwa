@@ -7,7 +7,7 @@
     "background_color": "#FF6B6B",
     "theme_color": "#FF6B6B",
     "orientation": "portrait",
-    "icons": [  // 👈 FALTAM OS COLCHETES AQUI
+    "icons": [ 
         {
             "src": "icons/icon-72x72.png",
             "sizes": "72x72",
