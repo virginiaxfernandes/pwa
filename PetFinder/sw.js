@@ -1,10 +1,14 @@
+// No sw.js
 const CACHE_NAME = 'petfinder-v1';
 const urlsToCache = [
     '/',
     '/index.html',
-    '/style.css',
+    '/style.css', 
     '/app.js',
-    '/manifest.json'
+    '/manifest.json',
+    '/images/icon-72x72.jpg',
+    '/images/icon-96x96.jpg',
+    '/images/icon-144x144.jp'
 ];
 
 self.addEventListener('install', event => {
